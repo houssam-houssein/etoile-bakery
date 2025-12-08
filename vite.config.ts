@@ -9,9 +9,10 @@ export default defineConfig({
   build: {
     outDir: 'docs',
   },
-  // IMPORTANT: Set this to your repository name for GitHub Pages
-  // Repository name: etoile-bakery
-  // Use '/etoile-bakery/' for production (GitHub Pages), '/' for development
-  base: process.env.NODE_ENV === 'production' ? '/etoile-bakery/' : '/',
+  // IMPORTANT: Base path configuration
+  // For custom domain: use '/' (root path)
+  // For GitHub Pages subpath: use '/etoile-bakery/'
+  // Currently set to '/' for custom domain support
+  base: '/',
 })
 
