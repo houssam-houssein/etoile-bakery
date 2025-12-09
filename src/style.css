@@ -192,7 +192,7 @@ main {
 
 .hero {
   position: relative;
-  min-height: calc(100vh - 140px);
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -213,8 +213,7 @@ main {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  transform: translateX(-10%);
-  margin-top: 5rem;
+  transform: translateX(-5%);
 }
 
 .eyebrow {
@@ -222,7 +221,8 @@ main {
   letter-spacing: 0.4em;
   font-size: 0.85rem;
   color: rgba(255, 255, 255, 0.75);
-  margin-top: -4rem;
+  margin-top: 0;
+  margin-bottom: 4rem;
 }
 
 .hero h1 {
@@ -234,7 +234,7 @@ main {
 
 .lead {
   font-size: 1.3rem;
-  margin-top: 5rem;
+  margin-top: 0;
   margin-bottom: 0;
 }
 
