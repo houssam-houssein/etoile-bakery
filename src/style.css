@@ -93,6 +93,99 @@ body {
   color: #6b8c4a;
 }
 
+/* Menu page - main navbar sticky at top, hides when scrolled */
+.page:has(main .menu-page) .top-bar.menu-top-bar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+}
+
+.page:has(main .menu-page) .top-bar.menu-top-bar.scrolled {
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Category navigation bar - positioned below main navbar, moves to top when scrolled */
+.category-nav {
+  position: fixed;
+  top: 80px; /* Below main navbar when at top */
+  left: 0;
+  right: 0;
+  z-index: 60;
+  background-color: rgba(248, 244, 236, 0.98);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  padding: 0.75rem clamp(1rem, 6vw, 6rem);
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  flex-wrap: nowrap;
+  padding-bottom: 0.5rem;
+  transition: top 0.3s ease;
+}
+
+.category-nav.scrolled {
+  top: 0; /* Move to top when main navbar is hidden */
+}
+
+.category-nav a {
+  color: #6b8c4a;
+  background-color: transparent;
+  border: 2px solid #6b8c4a;
+  border-radius: 999px;
+  padding: 0.5rem 1.25rem;
+  transition: all 0.2s ease;
+  display: inline-block;
+  flex-shrink: 0;
+  white-space: nowrap;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.category-nav a:hover {
+  color: #6b8c4a;
+  background-color: rgba(107, 140, 74, 0.1);
+}
+
+.category-nav a.active {
+  color: #ffffff;
+  background-color: #6b8c4a;
+  border-color: #6b8c4a;
+}
+
+/* Scrollbar styling for category navigation */
+.category-nav::-webkit-scrollbar {
+  height: 4px;
+}
+
+.category-nav::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 2px;
+}
+
+.category-nav::-webkit-scrollbar-thumb {
+  background: rgba(107, 140, 74, 0.3);
+  border-radius: 2px;
+}
+
+.category-nav::-webkit-scrollbar-thumb:hover {
+  background: rgba(107, 140, 74, 0.5);
+}
+
+/* Add padding to main content to account for both navbars */
+.page:has(main .menu-page) main {
+  padding-top: 150px; /* Main navbar + category nav height */
+}
+
 main {
   flex: 1;
 }
@@ -120,6 +213,7 @@ main {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  transform: translateX(-10%);
 }
 
 .eyebrow {
@@ -493,7 +587,7 @@ main {
   /* Home page navbar - align items to the right (default for all pages) */
   .top-bar {
     align-items: flex-start;
-  }
+}
   
   .top-bar .primary-nav {
     gap: 1rem;
@@ -508,56 +602,36 @@ main {
     display: inline-block;
   }
 
-  /* Menu page navbar - horizontally scrollable on mobile (overrides home page styles) */
-  .page:has(main .menu-page) .top-bar {
-    flex-direction: row !important;
-    flex-wrap: nowrap;
-    gap: 0.75rem;
+  /* Menu page navbar on mobile */
+  .page:has(main .menu-page) .top-bar.menu-top-bar {
     padding: 0.75rem 1rem;
-    overflow: hidden;
-    align-items: center;
   }
 
-  .page:has(main .menu-page) .top-bar .wordmark {
-    flex-shrink: 0;
+  /* Category navigation on mobile */
+  .category-nav {
+    padding: 0.75rem 1rem;
+    padding-bottom: 0.5rem;
   }
 
-  .page:has(main .menu-page) .top-bar .primary-nav {
-    flex: 1 !important;
-    min-width: 0;
-    overflow-x: auto;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
-    scroll-behavior: smooth;
-    flex-wrap: nowrap !important;
-    gap: 1rem;
-    justify-content: flex-start !important;
-    margin-left: 0.75rem !important;
-    padding-bottom: 2px;
-    width: auto !important;
-    text-align: left !important;
+  .category-nav a {
+    padding: 0.4rem 1rem;
+    font-size: 0.8rem;
   }
 
-  .page .top-bar .primary-nav::-webkit-scrollbar {
-    height: 3px;
+  /* Category navigation on mobile */
+  .category-nav {
+    top: 70px; /* Below main navbar on mobile when at top */
+    padding: 0.75rem 1rem;
+    padding-bottom: 0.5rem;
   }
 
-  .page .top-bar .primary-nav::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.05);
-    border-radius: 2px;
+  .category-nav.scrolled {
+    top: 0; /* Move to top when scrolled on mobile */
   }
 
-  .page .top-bar .primary-nav::-webkit-scrollbar-thumb {
-    background: rgba(106, 142, 66, 0.3);
-    border-radius: 2px;
-  }
-
-  .page .top-bar .primary-nav::-webkit-scrollbar-thumb:hover {
-    background: rgba(106, 142, 66, 0.5);
-  }
-
-  .page .top-bar .primary-nav a {
-    font-size: 0.85rem;
+  /* Adjust main content padding on mobile */
+  .page:has(main .menu-page) main {
+    padding-top: 130px; /* Mobile: main navbar + category nav height */
   }
 
   .hero {
@@ -568,7 +642,7 @@ main {
   .eyebrow {
     letter-spacing: 0.2em;
     margin-top: 0;
-  }
+}
 
   .hero-inner {
     margin-top: 4rem;
@@ -1116,7 +1190,7 @@ main {
 .admin-login-card label {
   font-weight: 600;
   color: #2b2b2b;
-}
+  }
 
 .admin-login-card input {
   padding: 0.85rem 1rem;
@@ -1134,7 +1208,7 @@ main {
   color: #c95a4b;
   font-size: 0.9rem;
   margin: 0;
-}
+  }
 
 @media (max-width: 960px) {
   .admin-grid {

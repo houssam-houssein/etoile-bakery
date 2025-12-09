@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import logoImage from '../assets/images/logo.png'
 import type { MenuCategory } from '../data/menuData'
 
@@ -10,6 +10,9 @@ interface MenuProps {
 }
 
 export function Menu({ categories, onBack, scrollToCategoryId, onScrollComplete }: MenuProps) {
+  const [activeCategory, setActiveCategory] = useState<string | null>(scrollToCategoryId || categories[0]?.id || null)
+  const [isScrolled, setIsScrolled] = useState(false)
+
   useEffect(() => {
     if (scrollToCategoryId) {
       // Small delay to ensure the DOM is rendered
@@ -17,6 +20,7 @@ export function Menu({ categories, onBack, scrollToCategoryId, onScrollComplete 
         const element = document.getElementById(scrollToCategoryId)
         if (element) {
           element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+          setActiveCategory(scrollToCategoryId)
           // Clear the scroll target after scrolling
           if (onScrollComplete) {
             setTimeout(() => {
@@ -28,9 +32,48 @@ export function Menu({ categories, onBack, scrollToCategoryId, onScrollComplete 
       return () => clearTimeout(timer)
     }
   }, [scrollToCategoryId, onScrollComplete])
+
+  // Track scroll position for navbar behavior
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY
+      setIsScrolled(scrollY > 100) // Show main navbar when scrolled past 100px
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    handleScroll() // Check on mount
+    
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  // Track which category is in view for active state
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + 200 // Offset for better detection
+      
+      for (const category of categories) {
+        const element = document.getElementById(category.id)
+        if (element) {
+          const rect = element.getBoundingClientRect()
+          const elementTop = rect.top + window.scrollY
+          const elementBottom = elementTop + rect.height
+          
+          if (scrollPosition >= elementTop && scrollPosition < elementBottom) {
+            setActiveCategory(category.id)
+            break
+          }
+        }
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    handleScroll() // Check on mount
+    
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [categories])
   return (
     <div className="page">
-      <header className="top-bar">
+      <header className={`top-bar menu-top-bar ${isScrolled ? 'scrolled' : ''}`}>
         <div className="wordmark">
           <img
             src={logoImage}
@@ -41,28 +84,24 @@ export function Menu({ categories, onBack, scrollToCategoryId, onScrollComplete 
             }}
           />
         </div>
-
-        <nav className="primary-nav" aria-label="Primary">
-          {categories.map((category) => (
-            <a
-              key={category.id}
-              href={`#${category.id}`}
-              onClick={(event) => {
-                event.preventDefault()
-                document.getElementById(category.id)?.scrollIntoView({ behavior: 'smooth' })
-              }}
-            >
-              {category.titleEn}
-            </a>
-          ))}
-        </nav>
-
-        {onBack && (
-          <button type="button" className="btn ghost dark menu-back-btn" onClick={onBack}>
-            Back
-          </button>
-        )}
       </header>
+
+      <nav className={`category-nav ${isScrolled ? 'scrolled' : ''}`} aria-label="Category Navigation">
+        {categories.map((category) => (
+          <a
+            key={category.id}
+            href={`#${category.id}`}
+            className={activeCategory === category.id ? 'active' : ''}
+            onClick={(event) => {
+              event.preventDefault()
+              setActiveCategory(category.id)
+              document.getElementById(category.id)?.scrollIntoView({ behavior: 'smooth' })
+            }}
+          >
+            {category.titleEn}
+          </a>
+        ))}
+      </nav>
 
       <main>
         <section className="menu-page">
