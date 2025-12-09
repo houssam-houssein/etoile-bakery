@@ -214,6 +214,7 @@ main {
   flex-direction: column;
   gap: 1rem;
   transform: translateX(-10%);
+  margin-top: 5rem;
 }
 
 .eyebrow {
