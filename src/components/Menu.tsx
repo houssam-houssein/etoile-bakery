@@ -4,12 +4,11 @@ import type { MenuCategory } from '../data/menuData'
 
 interface MenuProps {
   categories: MenuCategory[]
-  onBack?: () => void
   scrollToCategoryId?: string
   onScrollComplete?: () => void
 }
 
-export function Menu({ categories, onBack, scrollToCategoryId, onScrollComplete }: MenuProps) {
+export function Menu({ categories, scrollToCategoryId, onScrollComplete }: MenuProps) {
   const [activeCategory, setActiveCategory] = useState<string | null>(scrollToCategoryId || categories[0]?.id || null)
   const [isScrolled, setIsScrolled] = useState(false)
 

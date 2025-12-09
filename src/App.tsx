@@ -506,10 +506,6 @@ function App() {
     return (
       <Menu
         categories={menuCategories}
-        onBack={() => {
-          setScrollToCategoryId(undefined)
-          setView('home')
-        }}
         scrollToCategoryId={scrollToCategoryId}
         onScrollComplete={() => setScrollToCategoryId(undefined)}
       />
