@@ -66,7 +66,7 @@ body {
 .wordmark svg {
   width: 24px;
   height: 24px;
-  color: #7a8261;
+  color: #8a937e;
 }
 
 .wordmark img {
@@ -90,7 +90,7 @@ body {
 }
 
 .primary-nav a:hover {
-  color: #6b8c4a;
+  color: #8a937e;
 }
 
 /* Menu page - main navbar sticky at top, hides when scrolled */
@@ -137,9 +137,9 @@ body {
 }
 
 .category-nav a {
-  color: #6b8c4a;
+  color: #8a937e;
   background-color: transparent;
-  border: 2px solid #6b8c4a;
+  border: 2px solid #8a937e;
   border-radius: 999px;
   padding: 0.5rem 1.25rem;
   transition: all 0.2s ease;
@@ -152,14 +152,14 @@ body {
 }
 
 .category-nav a:hover {
-  color: #6b8c4a;
-  background-color: rgba(107, 140, 74, 0.1);
+  color: #8a937e;
+  background-color: rgba(138, 147, 126, 0.1);
 }
 
 .category-nav a.active {
   color: #ffffff;
-  background-color: #6b8c4a;
-  border-color: #6b8c4a;
+  background-color: #8a937e;
+  border-color: #8a937e;
 }
 
 /* Scrollbar styling for category navigation */
@@ -173,12 +173,12 @@ body {
 }
 
 .category-nav::-webkit-scrollbar-thumb {
-  background: rgba(107, 140, 74, 0.3);
+  background: rgba(138, 147, 126, 0.3);
   border-radius: 2px;
 }
 
 .category-nav::-webkit-scrollbar-thumb:hover {
-  background: rgba(107, 140, 74, 0.5);
+  background: rgba(138, 147, 126, 0.5);
 }
 
 /* Add padding to main content to account for both navbars */
@@ -261,8 +261,8 @@ main {
 }
 
 .btn.primary {
-  background-color: #6b8c4a;
-  border-color: #6b8c4a;
+  background-color: #8a937e;
+  border-color: #8a937e;
   color: #fffef7;
   box-shadow: 0 10px 25px rgba(18, 18, 18, 0.35);
 }
@@ -274,8 +274,8 @@ main {
 }
 
 .btn.ghost:hover:not(:disabled) {
-  border-color: #6b8c4a;
-  color: #6b8c4a;
+  border-color: #8a937e;
+  color: #8a937e;
 }
 
 .btn.ghost.dark {
@@ -319,13 +319,13 @@ main {
 .pillar-icon svg {
   width: 28px;
   height: 28px;
-  color: #7a8261;
+  color: #8a937e;
 }
 
 .pillar-card h3 {
   margin-bottom: 0.5rem;
   font-family: 'Playfair Display', serif;
-  color: #3e4d2c;
+  color: #8a937e;
 }
 
 .pillar-card p {
@@ -343,7 +343,7 @@ main {
 }
 
 .story-text h2 {
-  color: #6a8e42;
+  color: #8a937e;
   font-size: clamp(2rem, 4vw, 2.8rem);
   margin-bottom: 1.5rem;
 }
@@ -388,7 +388,7 @@ main {
 }
 
 .menu-text h2 {
-  color: #6a8e42;
+  color: #8a937e;
   font-size: clamp(2.2rem, 5vw, 3rem);
   margin-bottom: 0.5rem;
 }
@@ -466,7 +466,7 @@ main {
   text-align: center;
   padding: 4rem clamp(1.5rem, 6vw, 6rem);
   background: linear-gradient(135deg, #f9f7f0, #f6f2ea);
-  color: #506035;
+  color: #8a937e;
 }
 
 .visit-icon {
@@ -503,7 +503,7 @@ main {
 
 .footer-content h3 {
   margin-bottom: 0.75rem;
-  color: #5f7a46;
+  color: #8a937e;
 }
 
 .footer-content h4 {
@@ -527,7 +527,7 @@ main {
 }
 
 .footer-content a:hover {
-  color: #6a8e42;
+  color: #8a937e;
 }
 
 .footer-bottom {
@@ -541,20 +541,20 @@ main {
 .social a {
   margin-left: 0.75rem;
   text-decoration: none;
-  color: #5f7a46;
+  color: #8a937e;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  border: 1px solid rgba(95, 122, 70, 0.4);
+  border: 1px solid rgba(138, 147, 126, 0.4);
   transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
 
 .social a:hover {
-  background-color: rgba(95, 122, 70, 0.1);
-  color: #6a8e42;
+  background-color: rgba(138, 147, 126, 0.1);
+  color: #8a937e;
   transform: translateY(-2px);
 }
 
@@ -655,7 +655,7 @@ main {
 
   .story-gallery {
     grid-template-columns: 1fr;
-  }
+}
 
   .menu-card {
     min-height: 140px;
@@ -682,7 +682,7 @@ main {
 .contact-header h1 {
   font-family: 'Playfair Display', serif;
   font-size: clamp(2.5rem, 5vw, 3.5rem);
-  color: #6a8e42;
+  color: #8a937e;
   margin-bottom: 0.75rem;
 }
 
@@ -705,7 +705,7 @@ main {
 .contact-form-section h2 {
   font-family: 'Playfair Display', serif;
   font-size: clamp(1.8rem, 3vw, 2.2rem);
-  color: #6a8e42;
+  color: #8a937e;
   margin-bottom: 2rem;
 }
 
@@ -788,8 +788,8 @@ main {
 .form-group input:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: #6a8e42;
-  box-shadow: 0 0 0 3px rgba(106, 142, 66, 0.1);
+  border-color: #8a937e;
+  box-shadow: 0 0 0 3px rgba(138, 147, 126, 0.1);
 }
 
 .form-group input::placeholder,
@@ -833,7 +833,7 @@ main {
 .menu-page-header h1 {
   font-family: 'Playfair Display', serif;
   font-size: clamp(2.5rem, 5vw, 3.5rem);
-  color: #6a8e42;
+  color: #8a937e;
   margin-bottom: 0.75rem;
 }
 
@@ -858,7 +858,7 @@ main {
 .category-title {
   font-family: 'Playfair Display', serif;
   font-size: clamp(2rem, 4vw, 2.5rem);
-  color: #6a8e42;
+  color: #8a937e;
   margin-bottom: 0.25rem;
   text-align: center;
   direction: rtl;
@@ -866,7 +866,7 @@ main {
 
 .category-subtitle {
   text-align: center;
-  color: #7a8261;
+  color: #8a937e;
   font-size: 1rem;
   margin-bottom: 2rem;
   font-weight: 500;
@@ -892,7 +892,7 @@ main {
   padding: 1rem 1.25rem;
   text-align: left;
   font-weight: 600;
-  color: #3e4d2c;
+  color: #8a937e;
   font-size: 0.95rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -937,21 +937,21 @@ main {
 
 .item-name-en {
   font-size: 0.9rem;
-  color: #7a8261;
+  color: #8a937e;
   font-style: italic;
 }
 
 .item-price {
   text-align: right;
   font-size: 1.1rem;
-  color: #6a8e42;
+  color: #8a937e;
   font-weight: 600;
   font-family: 'Playfair Display', serif;
 }
 
 .item-price .currency {
   font-size: 0.85rem;
-  color: #7a8261;
+  color: #8a937e;
   margin-left: 0.25rem;
   direction: rtl;
 }
@@ -977,7 +977,7 @@ main {
 
 .item-price .price-available {
   font-size: 0.9rem;
-  color: #7a8261;
+  color: #8a937e;
   font-style: italic;
   font-weight: 400;
 }
@@ -1004,7 +1004,7 @@ main {
 }
 
 .link-button:hover {
-  color: #6b8c4a;
+  color: #8a937e;
 }
 
 .menu-back-btn {
