@@ -120,11 +120,13 @@ etoile/
 
 ### Admin Login
 
-- The dashboard requires a password; by default it is `et0ile2025`.
-- Change it by setting `VITE_ADMIN_PASSWORD` in a `.env` file:
+- The dashboard requires a password that **must be set** via the `VITE_ADMIN_PASSWORD` environment variable.
+- **No default password** is provided for security reasons.
+- For local development, create a `.env` file:
   ```bash
-  echo "VITE_ADMIN_PASSWORD=supersecret" > .env
+  echo "VITE_ADMIN_PASSWORD=your-secure-password" > .env
   ```
+- For production (GitHub Pages), add `VITE_ADMIN_PASSWORD` as a GitHub Secret (Settings → Secrets and variables → Actions).
 - After authenticating, sessions persist in the browser (via `sessionStorage`) until you log out or close the tab/browser.
 
 ### Firebase Setup (For Global Menu Storage)
