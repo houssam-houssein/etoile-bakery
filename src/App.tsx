@@ -5,6 +5,7 @@ import { Menu } from './components/Menu'
 import { AdminDashboard, type ItemDraft } from './components/AdminDashboard'
 import { AdminLogin } from './components/AdminLogin'
 import { cloneMenuData, defaultMenuData, type MenuCategory } from './data/menuData'
+import { loadMenuDataFromFirebase, saveMenuDataToFirebase, isFirebaseConfigured } from './services/firebase'
 import heroImage from './assets/images/sp.png'
 import logoImage from './assets/images/logo.png'
 import osImage from './assets/images/os.png'
@@ -353,28 +354,77 @@ function App() {
   const [loginError, setLoginError] = useState<string | null>(null)
   const [scrollToCategoryId, setScrollToCategoryId] = useState<string | undefined>(undefined)
   const [menuCategories, setMenuCategories] = useState<MenuCategory[]>(() => {
-    if (typeof window !== 'undefined') {
+    // Initialize with defaults, will be replaced by Firebase/localStorage data on mount
+    return cloneMenuData(defaultMenuData)
+  })
+  const [isLoadingMenu, setIsLoadingMenu] = useState(true)
+
+  // Load menu data on mount: Firebase first, then localStorage, then defaults
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      setIsLoadingMenu(false)
+      return
+    }
+
+    const loadMenuData = async () => {
+      setIsLoadingMenu(true)
+      
+      // Try Firebase first (if configured)
+      if (isFirebaseConfigured()) {
+        const firebaseData = await loadMenuDataFromFirebase()
+        if (firebaseData) {
+          setMenuCategories(firebaseData)
+          // Also save to localStorage as backup
+          window.localStorage.setItem(MENU_STORAGE_KEY, JSON.stringify(firebaseData))
+          setIsLoadingMenu(false)
+          return
+        }
+      }
+
+      // Fallback to localStorage
       const stored = window.localStorage.getItem(MENU_STORAGE_KEY)
       if (stored) {
         try {
           const parsed = JSON.parse(stored) as MenuCategory[]
-          return parsed
+          setMenuCategories(parsed)
+          setIsLoadingMenu(false)
+          return
         } catch {
-          // ignore corrupted data and fall back to defaults
+          // ignore corrupted data
         }
       }
+
+      // Use defaults
+      const defaults = cloneMenuData(defaultMenuData)
+      setMenuCategories(defaults)
+      
+      // Save defaults to Firebase if configured (first time setup)
+      if (isFirebaseConfigured()) {
+        await saveMenuDataToFirebase(defaults)
+      }
+      
+      setIsLoadingMenu(false)
     }
 
-    return cloneMenuData(defaultMenuData)
-  })
+    loadMenuData()
+  }, [])
 
+  // Save menu data whenever it changes
   useEffect(() => {
-    if (typeof window === 'undefined') {
+    if (typeof window === 'undefined' || isLoadingMenu) {
       return
     }
 
+    // Save to localStorage as backup
     window.localStorage.setItem(MENU_STORAGE_KEY, JSON.stringify(menuCategories))
-  }, [menuCategories])
+
+    // Save to Firebase if configured (for global updates)
+    if (isFirebaseConfigured()) {
+      saveMenuDataToFirebase(menuCategories).catch((error) => {
+        console.error('Failed to save menu data to Firebase:', error)
+      })
+    }
+  }, [menuCategories, isLoadingMenu])
 
   const getItemId = () => {
     if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
@@ -542,4 +592,5 @@ function App() {
 }
 
 export default App
+
 
