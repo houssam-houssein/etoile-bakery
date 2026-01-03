@@ -16,7 +16,7 @@ import pizzaImage from './assets/images/p.png'
 const navLinks = ['Home', 'About', 'Menu', 'Contact']
 const MENU_STORAGE_KEY = 'etoile-menu-data'
 const ADMIN_STORAGE_KEY = 'etoile-admin-auth'
-const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD ?? 'et0ile2025'
+const ADMIN_PASSWORD = (import.meta.env.VITE_ADMIN_PASSWORD?.trim() || 'et0ile2025').trim()
 type AppView = 'home' | 'menu' | 'contact' | 'admin'
 
 const RAW_BASE_PATH = import.meta.env.BASE_URL ?? '/'
@@ -496,7 +496,7 @@ function App() {
   }
 
   const handleAdminLogin = (password: string) => {
-    if (password === ADMIN_PASSWORD) {
+    if (password.trim() === ADMIN_PASSWORD) {
       setIsAdminAuthenticated(true)
       setLoginError(null)
       if (typeof window !== 'undefined') {
